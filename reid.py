@@ -87,7 +87,7 @@ def extract_face_embedding(frame_bgr, box):
     if x2 <= x1 or y2 <= y1:
         return None
 
-    # Chỉ cắt ~35% phía trên bbox (vùng đầu/mặt) để giảm chi phí xử lý
+    # Chỉ cắt ~35% phía trên bbox (vùng đầu/mặt) để giảm  xử lý
     head_h = max(int((y2 - y1) * 0.35), 20)
     crop = frame_bgr[y1:min(y1 + head_h, y2), x1:x2]
     if crop.size == 0:
