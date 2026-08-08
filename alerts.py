@@ -26,7 +26,6 @@ class AlertLevel:
 class EscalationEngine:
     def __init__(self, entity_manager):
         self.em = entity_manager
-        # nhóm hiện đang ở mức báo động nào, để tránh log lặp lại liên tục
         self._last_level_by_group = {}
 
     def _grouping_key(self, e):
@@ -54,11 +53,7 @@ class EscalationEngine:
             if not unverified:
                 self._last_level_by_group[key] = AlertLevel.NORMAL
                 continue
-
-            # Mức 1: TOÀN BỘ thành viên chưa xác minh đang ở trạng thái ALERT (đã rời Vùng A)
             all_left_a = all(m.state == EntityState.ALERT for m in unverified)
-
-            # Mức 2: TOÀN BỘ thành viên chưa xác minh đã rời cả Vùng B (left_zone_b_at đang đếm)
             all_left_b = all(m.left_zone_b_at is not None for m in unverified)
 
             if all_left_a and all_left_b:
