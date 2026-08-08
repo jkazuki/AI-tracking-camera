@@ -22,10 +22,3 @@ An advanced, real-time AI security monitoring system powered by **YOLOv8** and *
 *   **OS:** Windows 10/11 (Required for Windows Capture API).
 *   **Python:** Python 3.12 recommended.
 *   **Hardware:** A dedicated GPU (NVIDIA RTX 3060 12GB or higher recommended) is highly advised to maintain 30-60 FPS for real-time processing.
-
-##  Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-   cd your-repo-name
