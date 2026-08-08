@@ -1,6 +1,5 @@
 """
 capture.py
-Thay vì kết nối RTSP tới camera qua IP, module này chụp trực tiếp từ PC theo
 2 chế độ:
 
   - "window" (khuyến nghị, giống Window Capture của OBS): chọn ĐÚNG 1 cửa sổ
@@ -41,7 +40,7 @@ except ImportError:
 # =====================================================================
 # Chọn vùng bằng cách kéo chuột trên 1 tấm ảnh cho sẵn (dùng chung cho
 # cả 2 chế độ: crop trong cửa sổ, hoặc khoanh vùng trên toàn màn hình).
-# =====================================================================
+# ====================================================================
 def _fit_window(win_name: str, img_w: int, img_h: int, max_w: int = 1600, max_h: int = 900):
     """
     Đặt kích thước cửa sổ vừa với màn hình (tránh bị phóng lớn hơn màn hình
@@ -106,7 +105,7 @@ def _pick_rect_from_image(img, win_name: str):
 
 
 # =====================================================================
-# Chế độ "window": liệt kê cửa sổ đang mở, giống danh sách nguồn Window
+# Chế độ "window": liệt kê cửa sổ đang mở, giống danh sách nguồn Windoww
 # Capture của OBS.
 # =====================================================================
 def list_windows():
@@ -151,7 +150,7 @@ def _select_window_source():
         win32gui.SetForegroundWindow(hwnd)
         time.sleep(0.3)
     except Exception:
-        pass  # một số cửa sổ hệ thống có thể không cho bring-to-front, vẫn tiếp tục được
+        pass  
 
     left, top, right, bottom = win32gui.GetWindowRect(hwnd)
     win_w, win_h = right - left, bottom - top
@@ -179,7 +178,7 @@ def _select_window_source():
 
 
 # =====================================================================
-# Chế độ "screen": khoanh 1 vùng cố định trên toàn màn hình (chế độ cũ).
+# Chế độ "screen": khoanh 1 vùng cố định trên toàn màn hình (chế độ cũ)
 # =====================================================================
 def _select_screen_source():
     with mss.mss() as sct:
@@ -245,7 +244,7 @@ def save_region(region: dict, path=None):
 
 
 # =====================================================================
-# Luồng đọc nền (threaded), luôn giữ khung hình mới nhất để giảm độ trễ.
+# Luồng đọc nền (threaded), luôn giữ khung hình mới nhất để giảm độ trễ
 # =====================================================================
 class ScreenCapture:
     """Chế độ 'screen': chụp liên tục 1 vùng màn hình cố định."""
@@ -442,7 +441,6 @@ class WgcWindowCapture:
         self.running = True
         self.connected = True
         try:
-            # start_free_threaded() tự chạy nền, không block thread hiện tại.
             self._capture.start_free_threaded()
         except Exception as ex:
             self.connected = False
@@ -456,8 +454,6 @@ class WgcWindowCapture:
     def stop(self):
         self.running = False
         self._stop_requested = True
-        # Việc dừng thật sự diễn ra ở khung hình kế tiếp bên trong on_frame_arrived.
-
 
 class CompositeCanvas:
     """
