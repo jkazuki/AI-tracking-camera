@@ -120,7 +120,7 @@ def main():
         print("Kiểm tra: pip install -r requirements.txt, driver GPU/CUDA, và config.DEVICE.")
         return
 
-    # 2 thread song song: CMD1 = bảng thông báo, CMD2 = gán vùng/xác minh/biệt danh
+    # 2thread song song: CMD1 = bảng thông báo, CMD2 = gán vùng/xác minh/biệt danh
     t1 = threading.Thread(target=run_notification_console, args=(event_queue, stop_event), daemon=True)
     t2 = threading.Thread(target=run_operator_console, args=(entity_manager, state_lock, stop_event), daemon=True)
     t1.start()
