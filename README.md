@@ -1,26 +1,31 @@
-# Hệ thống Giám sát Hành vi Đa Camera & Cảnh báo Phân vùng Thời gian thực
+# Real-Time Behavior Monitoring & Zone Alert System
 
-Dự án này là một hệ thống AI giám sát an ninh thời gian thực, sử dụng **YOLOv8** và **ByteTrack** để phát hiện và theo dõi người. Điểm đặc biệt của hệ thống là khả năng chụp trực tiếp từ các cửa sổ ứng dụng camera trên PC (như Imou Life) thông qua **Windows Graphics Capture API**, loại bỏ nhu cầu kết nối RTSP phức tạp[cite: 3, 5].
+An advanced, real-time AI security monitoring system powered by **YOLOv8** and **ByteTrack**. Unlike traditional systems that require complex RTSP streams, this project utilizes **Windows Graphics Capture API** to grab frames directly from desktop applications (e.g., Imou Life, VMS software), making it highly flexible and easy to deploy.
 
-##  Tính năng nổi bật
+![System Demo](demo.png)
+*(Note: Replace demo.png with an actual screenshot or GIF of your system running)*
 
-*   **Chụp hình qua Cửa sổ (Window Capture):** Tự động bám theo cửa sổ ứng dụng camera (kiểu OBS), chống lặp màn hình (Feedback loop).
-*   **Phân vùng Cảnh báo (Zone A/B/C):** 
-    *   Hỗ trợ vẽ tự do các vùng giám sát trực tiếp trên video.
-    *   Thang báo động 3 mức độ (Mức 0: Bình thường, Mức 1: Vàng, Mức 2: Đỏ chớp nháy)[cite: 4].
-*   **Face Re-ID:** Nhận diện khuôn mặt để nối lại ID tự động khi bị đứt track (do khựng FPS hoặc bị che khuất).
-*   **Bộ lọc Vật thể tĩnh:** Tự động loại bỏ các đồ vật bị AI nhận nhầm thành người nếu chúng không di chuyển trong một khoảng thời gian[cite: 8].
-*   **Điều khiển Luồng Đôi (Dual Console):** CMD1 chuyên nhận thông báo khẩn cấp (cần xác nhận `Y/N`), CMD2 chuyên dùng để gán vùng, xác minh và đặt biệt danh[cite: 3, 6, 7].
+##  Key Features
 
-## 💻 Yêu cầu hệ thống
+*   **Direct Window Capture:** Grabs frames directly from camera software windows (like OBS), avoiding feedback loops and eliminating the need for RTSP links.
+*   **Dynamic Zone Drawing (Zones A/B/C):** 
+    *   Draw custom polygonal monitoring zones directly on the video feed.
+    *   3-Tier Alert System (Level 0: Normal, Level 1: Yellow, Level 2: Flashing Red).
+*   **Face Re-ID:** Uses facial recognition to automatically reconnect tracking IDs if a person is temporarily obscured or if the frame rate drops.
+*   **Static Object Filter:** Automatically ignores stationary objects that the AI mistakenly identifies as people over a set period.
+*   **Dual Console Control:** 
+    *   **CMD 1:** Dedicated alert terminal (requires `Y/N` confirmation for security breaches).
+    *   **CMD 2:** Command terminal to assign zones, verify safe personnel, and set nicknames.
 
-*   **OS:** Windows 10/11 (Được khuyến nghị để sử dụng tối đa tính năng Window Capture).
-*   **Python:** Môi trường phát triển Python 3.12.
-*   **Phần cứng:** Hệ thống hoạt động tốt trên các cấu hình desktop tiêu chuẩn (ví dụ: các bản dựng sử dụng mainboard chipset H310 trở lên) nhưng yêu cầu bắt buộc phải có **GPU rời** (Khuyến nghị NVIDIA RTX 3060 12GB trở lên) để đảm bảo tốc độ 30-60 FPS cho toàn bộ Canvas[cite: 1, 3].
+##  System Requirements
 
-##  Cài đặt
+*   **OS:** Windows 10/11 (Required for Windows Capture API).
+*   **Python:** Python 3.12 recommended.
+*   **Hardware:** A dedicated GPU (NVIDIA RTX 3060 12GB or higher recommended) is highly advised to maintain 30-60 FPS for real-time processing.
 
-1. **Clone kho lưu trữ:**
+##  Installation
+
+1. **Clone the repository:**
    ```bash
    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
    cd your-repo-name
